@@ -36,3 +36,45 @@ WHERE i.CustomerId = c.CustomerId;
 
 -- 7) Détails des factures : Fournissez une requête affichant le total de chaque facture, le nom du client, le pays et le nom de l'agent de vente.
 
+SELECT c.FirstName, c.LastName, i.BillingCountry, SupportRepId, e.FirstName, e.LastName, i.Total
+FROM invoice as i, (customer as c JOIN employee as e ON c.SupportRepId = e.EmployeeId)
+WHERE i.CustomerId = c.CustomerId;
+
+-- 8_a) Ventes par année : Combien de factures y a-t-il eu en 2021 et 2023 ?
+
+SELECT COUNT(*) as nb_invoice_2021 FROM invoice 
+WHERE YEAR(InvoiceDate) = 2021;
+
+SELECT COUNT(*) as nb_invoice_2023 
+FROM invoice 
+WHERE YEAR(InvoiceDate) = 2023;
+
+-- 8_b) Quels sont les montants totaux des ventes pour chacune de ces années ?
+
+SELECT SUM(Total) as total_invoice_2021 
+FROM invoice
+WHERE YEAR(InvoiceDate) = 2021
+GROUP BY YEAR(InvoiceDate);
+
+SELECT SUM(Total) as total_invoice_2021 
+FROM invoice
+WHERE YEAR(InvoiceDate) = 2023
+GROUP BY YEAR(InvoiceDate);
+
+-- 9) Articles pour une facture donnée : Fournissez une requête comptant le nombre d'articles (line items) pour l'ID de facture 37.
+
+SELECT InvoiceId, COUNT(Quantity) 
+FROM invoiceline
+WHERE InvoiceId = 37;
+
+-- 10) Articles par facture : Fournissez une requête comptant le nombre d'articles (line items) pour chaque facture.
+
+SELECT InvoiceId, COUNT(Quantity) 
+FROM invoiceline
+GROUP BY InvoiceId;
+
+-- 11) Nom des morceaux : Fournissez une requête incluant le nom du morceau pour chaque ligne de facture.
+
+
+
+
