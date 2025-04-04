@@ -75,6 +75,112 @@ GROUP BY InvoiceId;
 
 -- 11) Nom des morceaux : Fournissez une requête incluant le nom du morceau pour chaque ligne de facture.
 
+SELECT i.InvoiceLineId, i.InvoiceId, i.TrackId, i.UnitPrice, i.Quantity, t.name 
+FROM invoiceline as i JOIN track as t ON i.TrackId = t.TrackId;
+
+-- 12) Morceaux et artistes : Fournissez une requête incluant le nom du morceau acheté ET le nom de l'artiste pour chaque ligne de facture.
+
+SELECT i.InvoiceLineId, i.InvoiceId, i.TrackId, i.UnitPrice, i.Quantity, t.name, t.Composer 
+FROM invoiceline as i JOIN track as t ON i.TrackId = t.TrackId;
+
+-- 13) Nombre de factures par pays : Fournissez une requête affichant le nombre de factures par pays.
+
+SELECT BillingCountry, COUNT(*) 
+FROM invoice
+GROUP BY BillingCountry;
+
+-- 14) Nombre de morceaux par playlist : Fournissez une requête affichant le nombre total de morceaux dans chaque playlist. 
+-- Le nom de la playlist doit être inclus dans le tableau résultant.
+
+SELECT p.Name as playlist_name, COUNT(*) as nb_track
+FROM playlist as p JOIN playlisttrack as pt ON p.PlaylistId = pt.PlaylistId
+GROUP BY p.Name;
+
+-- 15) Liste des morceaux : Fournissez une requête affichant tous les morceaux (Tracks), mais sans afficher les IDs.
+-- Le tableau résultant doit inclure le nom de l'album, le type de média et le genre.
+
+SELECT t.Name as name_track, a.Title as album_title, m.Name as mediatype_name, g.Name as genre_name 
+FROM track as t 
+JOIN album as a ON t.AlbumId = a.AlbumId 
+JOIN mediatype as m ON t.MediaTypeId = m.MediaTypeId
+JOIN genre as g ON t.GenreId = g.GenreId;
+
+-- 16) Factures et articles : Fournissez une requête affichant toutes les factures, avec le nombre d'articles par facture.
+
+-- Similaire à la question 10
+
+-- 17) Ventes par agent de vente : Fournissez une requête affichant les ventes totales réalisées par chaque agent de vente.
+
+SELECT e.FirstName, e.LastName, SUM(i.Total) as total_vente
+FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
+JOIN employee as e ON c.SupportRepId = e.EmployeeId
+GROUP BY e.FirstName, e.LastName;
+
+-- 18) Meilleur agent de 2021 : Quel agent de vente a réalisé le plus de ventes en 2021 ?
+
+SELECT e.FirstName, e.LastName, SUM(i.Total) as total_vente
+FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
+JOIN employee as e ON c.SupportRepId = e.EmployeeId
+WHERE YEAR(i.InvoiceDate) = 2021
+GROUP BY e.FirstName, e.LastName
+ORDER BY total_vente DESC
+LIMIT 1;
+
+SELECT e.FirstName, e.LastName
+FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
+JOIN employee as e ON c.SupportRepId = e.EmployeeId
+WHERE YEAR(i.InvoiceDate) = 2021
+GROUP BY e.FirstName, e.LastName
+HAVING SUM(i.Total) = (SELECT Max(T.total) FROM 
+											(SELECT SUM(i.Total) as total 
+											 FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
+											 JOIN employee as e ON c.SupportRepId = e.EmployeeId
+											 WHERE YEAR(i.InvoiceDate) = 2021
+											 GROUP BY e.FirstName, e.LastName) 
+										as T);
+                                        
+-- 19) Meilleur agent de 2010 : Quel agent de vente a réalisé le plus de ventes en 2022 ?
+
+SELECT e.FirstName, e.LastName
+FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
+JOIN employee as e ON c.SupportRepId = e.EmployeeId
+WHERE YEAR(i.InvoiceDate) = 2022
+GROUP BY e.FirstName, e.LastName
+HAVING SUM(i.Total) = (SELECT Max(T.total) FROM 
+											(SELECT SUM(i.Total) as total 
+											 FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
+											 JOIN employee as e ON c.SupportRepId = e.EmployeeId
+											 WHERE YEAR(i.InvoiceDate) = 2022
+											 GROUP BY e.FirstName, e.LastName) 
+										as T);
+                                        
+-- 20) Meilleur agent global : Quel agent de vente a réalisé le plus de ventes en tout ?
+
+SELECT e.FirstName, e.LastName
+FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
+JOIN employee as e ON c.SupportRepId = e.EmployeeId
+GROUP BY e.FirstName, e.LastName
+HAVING SUM(i.Total) = (SELECT Max(T.total) FROM 
+											(SELECT SUM(i.Total) as total 
+											 FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
+											 JOIN employee as e ON c.SupportRepId = e.EmployeeId
+											 GROUP BY e.FirstName, e.LastName) 
+										as T);
+                                        
+-- 21) Clients par agent de vente : Fournissez une requête affichant le nombre de clients attribués à chaque agent de vente.
+
+SELECT e.EmployeeId, e.FirstName, e.FirstName, COUNT(c.CustomerId) as nb_customer
+FROM customer as c JOIN employee as e ON c.SupportRepId = e.EmployeeId
+GROUP BY c.SupportRepId;
+
+-- 22) Ventes totales par pays : Fournissez une requête affichant les ventes totales par pays. Quel pays a dépensé le plus ?
+
+SELECT BillingCountry, SUM(Total) as total_buy
+FROM invoice
+GROUP BY BillingCountry
+ORDER BY total_buy DESC;
+
+-- Le pays à avoir éffectué le plus d'achat est l'USA
 
 
 
