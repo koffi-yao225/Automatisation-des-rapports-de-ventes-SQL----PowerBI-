@@ -1,6 +1,7 @@
 # Automatisation_des_ventes_SQL_&_PowerBI
 
-##📌 Contexte
+📌 ## Contexte
+
 Ce projet a été réalisé dans le cadre de l’apprentissage de l'automatisation des rapports d’analyse de données. L’objectif était de créer un rapport de ventes interactif et automatisé, à partir d'une base de données d’entreprise de vente opérant dans plusieurs pays.
 
 Le fichier SQL contenant le schema de la base et les données est disponible sur mon espace mais aussi sur le lien https://github.com/lerocha/chinook-database si vous utisés des systèmes de gestion de base de données différent de MYSQL.
