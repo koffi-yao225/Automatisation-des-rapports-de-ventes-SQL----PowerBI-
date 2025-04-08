@@ -72,7 +72,7 @@ Configuration du rafraîchissement automatique des données (connecteur + gatewa
 
 ![Visualisation_tableau_de_bord](https://github.com/user-attachments/assets/77e5a8fa-df91-40cf-b61e-b6d10c03a9ce)
 
-### Je vous invite à télécharger le tableau_de_bors.pbix afin de visualiser l'intéraction
+### Je vous invite à télécharger le tableau_de_bord.pbix afin de visualiser l'intéraction
 
 ## Ce que j’ai appris 🧩
 
