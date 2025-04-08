@@ -1,0 +1,30 @@
+BillingCountry,Name,SUM(il.Quantity)
+USA,Rock,157.0
+Canada,Rock,107.0
+USA,Latin,91.0
+Brazil,Rock,81.0
+France,Rock,65.0
+USA,Metal,64.0
+Germany,Rock,62.0
+Canada,Latin,60.0
+Brazil,Latin,53.0
+USA,Alternative & Punk,50.0
+Canada,Metal,40.0
+Canada,Alternative & Punk,36.0
+France,Alternative & Punk,31.0
+France,Latin,26.0
+Germany,Metal,25.0
+USA,Jazz,22.0
+France,Metal,20.0
+Germany,Latin,18.0
+USA,Blues,15.0
+Brazil,Metal,15.0
+Germany,Blues,14.0
+Canada,Jazz,13.0
+Germany,Alternative & Punk,13.0
+France,Jazz,11.0
+Brazil,Alternative & Punk,7.0
+Brazil,Blues,6.0
+Canada,Blues,4.0
+Germany,Jazz,2.0
+France,Blues,2.0

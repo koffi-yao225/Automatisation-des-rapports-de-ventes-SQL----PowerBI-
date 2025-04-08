@@ -1,0 +1,16 @@
+YEAR(i.InvoiceDate),FirstName,LastName,total_vente
+2021,Jane,Peacock,123.75
+2021,Margaret,Park,161.37
+2021,Steve,Johnson,164.34
+2022,Jane,Peacock,221.92
+2022,Margaret,Park,122.76
+2022,Steve,Johnson,136.77
+2023,Jane,Peacock,184.34
+2023,Margaret,Park,125.77
+2023,Steve,Johnson,159.47
+2024,Jane,Peacock,146.6
+2024,Margaret,Park,197.2
+2024,Steve,Johnson,133.73
+2025,Jane,Peacock,156.43
+2025,Margaret,Park,168.3
+2025,Steve,Johnson,125.85

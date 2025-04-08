@@ -118,6 +118,7 @@ GROUP BY e.FirstName, e.LastName;
 
 -- 18) Meilleur agent de 2021 : Quel agent de vente a réalisé le plus de ventes en 2021 ?
 
+-- Cette méthode est correcte mais n'est pas vraiment conseillé si on veux récuperer que le nom du vendeur
 SELECT e.FirstName, e.LastName, SUM(i.Total) as total_vente
 FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
 JOIN employee as e ON c.SupportRepId = e.EmployeeId
@@ -126,6 +127,7 @@ GROUP BY e.FirstName, e.LastName
 ORDER BY total_vente DESC
 LIMIT 1;
 
+-- Opter plutôt pour celle-ci
 SELECT e.FirstName, e.LastName
 FROM invoice as i JOIN customer as c ON i.CustomerId = c.CustomerId
 JOIN employee as e ON c.SupportRepId = e.EmployeeId
@@ -182,5 +184,61 @@ ORDER BY total_buy DESC;
 
 -- Le pays à avoir éffectué le plus d'achat est l'USA
 
+-- 23) Morceau le plus acheté en 2021 : Fournissez une requête affichant le morceau le plus acheté en 2013.
 
+SELECT t.Name, SUM(il.Quantity) FROM invoice as i 
+JOIN invoiceline as il ON i.InvoiceId = il.InvoiceId
+JOIN track as t ON t.TrackId = il.TrackId
+WHERE YEAR(i.InvoiceDate) = 2021
+GROUP BY t.Name
+ORDER BY SUM(il.Quantity) DESC;
 
+-- le morceau le plus acheté en 2021 est Dazel and confused
+
+-- 24) Top 5 des morceaux les plus achetés : Fournissez une requête affichant les 5 morceaux les plus achetés en tout.
+
+SELECT t.Name, SUM(il.Quantity) FROM invoice as i 
+JOIN invoiceline as il ON i.InvoiceId = il.InvoiceId
+JOIN track as t ON t.TrackId = il.TrackId
+GROUP BY t.Name
+ORDER BY SUM(il.Quantity) DESC
+LIMIT 5;
+
+-- 25) Top 3 des artistes les plus vendus : Fournissez une requête affichant les 3 artistes les plus vendus.
+
+SELECT t.Composer, SUM(il.Quantity) FROM invoice as i 
+JOIN invoiceline as il ON i.InvoiceId = il.InvoiceId
+JOIN track as t ON t.TrackId = il.TrackId
+GROUP BY t.Composer
+ORDER BY SUM(il.Quantity) DESC
+LIMIT 4;
+
+-- 26) Type de média le plus acheté : Fournissez une requête affichant le type de média le plus acheté
+
+SELECT m.Name, SUM(il.Quantity) FROM invoice as i 
+JOIN invoiceline as il ON i.InvoiceId = il.InvoiceId
+JOIN track as t ON t.TrackId = il.TrackId
+JOIN mediatype as m ON t.MediaTypeId = m.MediaTypeId
+GROUP BY m.Name
+ORDER BY SUM(il.Quantity) DESC;
+
+-- 27) Genre de musique le plus acheté : Fournissez une requête affichant le genre de musique le plus acheté
+
+SELECT g.Name, SUM(il.Quantity) FROM invoice as i 
+JOIN invoiceline as il ON i.InvoiceId = il.InvoiceId
+JOIN track as t ON t.TrackId = il.TrackId
+JOIN genre as g ON t.GenreId = g.GenreId
+GROUP BY g.Name
+ORDER BY SUM(il.Quantity) DESC
+LIMIT 6;
+
+-- 28) Genre de musique les plus acheté par pays : Fournissez une requête affichant le genre de musique le plus acheté par pays
+-- J'ai sélectionné les pays qui ont éffectué le plus de vente et les genres les plus vendus
+
+SELECT i.BillingCountry, g.Name, SUM(il.Quantity) FROM invoice as i 
+JOIN invoiceline as il ON i.InvoiceId = il.InvoiceId
+JOIN track as t ON t.TrackId = il.TrackId
+JOIN genre as g ON t.GenreId = g.GenreId
+WHERE i.BillingCountry IN ("USA", "Canda", "Brazil", "France", "Germany") AND g.Name IN ("Rock", "Latin", "Metal", "Alternative & Punk", "Jazz", "Blues")
+GROUP BY i.BillingCountry, g.Name
+ORDER BY SUM(il.Quantity) DESC;

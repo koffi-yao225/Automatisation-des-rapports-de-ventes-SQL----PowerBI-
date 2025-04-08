@@ -2,8 +2,10 @@ import pandas as pd
 import sqlalchemy
 
 
-engine = sqlalchemy.create_engine("mysql+pymysql://root:Bachelier2018@localhost/chinook")
+engine = sqlalchemy.create_engine("mysql+pymysql://user:password@host/db") # connexion à la base données
 
-df = pd.read_sql("select * from ...............", engine) # ecrire une requête afin de récupérer la VUE créée
+df = pd.read_sql("select * from ..................", engine) # requête afin de récupérer la VUE souhaitée
 
-df.to_csv("rapport_total_vente.csv",index=False) # enregistrer dns un csv
+df.to_csv("fichier.csv",index=False) # enregistrement dans un csv
+
+
