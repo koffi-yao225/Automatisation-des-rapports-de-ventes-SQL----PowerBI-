@@ -1,6 +1,6 @@
 # Automatisation_des_ventes_SQL_&_PowerBI
 
-📌 ## Contexte
+📌 # Contexte
 
 Ce projet a été réalisé dans le cadre de l’apprentissage de l'automatisation des rapports d’analyse de données. L’objectif était de créer un rapport de ventes interactif et automatisé, à partir d'une base de données d’entreprise de vente opérant dans plusieurs pays.
 
