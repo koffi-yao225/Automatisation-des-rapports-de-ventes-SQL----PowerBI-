@@ -72,3 +72,17 @@ Configuration du rafraîchissement automatique des données (connecteur + gatewa
 
 ![Visualisation_tableau_de_bord](https://github.com/user-attachments/assets/77e5a8fa-df91-40cf-b61e-b6d10c03a9ce)
 
+### Je vous invite à télécharger le tableau_de_bors.pbix afin de visualiser l'intéraction
+
+## Ce que j’ai appris 🧩
+
+Automatiser un workflow complet : ingestion ➝ traitement SQL ➝ visualisation ➝ publication
+
+Utiliser les vues SQL comme couche d’abstraction pour des dashboards performants
+
+Connecter Power BI à une base MySQL en local et en ligne
+
+Mettre en place un rafraîchissement automatique dans Power BI Service
+
+
+
